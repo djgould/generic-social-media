@@ -1,16 +1,14 @@
-<% provide(:title, 'Sign Up') %>
-<%= form_for @user do |f| %>
-  <%= f.label :name %>
-  <%= f.text_field :name %>
+<% provide(:title, 'Sign In') %>
 
-  <%= f.label :email %>
-  <%= f.text_field :email %>
-
-  <%= f.label :password %>
-  <%= f.password_field :password %>
-
-  <%= f.label :password_confirmation %>
-  <%= f.password_field :password_confirmation %>
-  
-  <%= f.submit 'Sign Up' %>
-<% end %>
+<div class="container clearfix">
+  <div class="container clearfix">
+    <h2 class="form-title">Sign In</h2>
+    <%= form_for @user do |f| %>
+      <%= f.text_field :name, class: 'email', placeholder: 'Name' %>
+      <%= f.text_field :email, class: 'email', placeholder: 'Email' %>
+      <%= f.password_field :password, class: 'password', placeholder: 'Password' %>
+      <%= f.password_field :password_confirmation, class: 'password', placeholder: 'Confirm Password' %>
+    <%= submit_tag 'Sign In', class: 'sign_in' %>
+    <% end %>
+  </div>
+</div>

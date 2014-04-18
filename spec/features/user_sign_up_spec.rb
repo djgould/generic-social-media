@@ -14,6 +14,7 @@ describe 'User Sign Up' do
       before { sign_up_with user.name, user.email, user.password, user.password }
       it { should have_title('Sign Up') }
     end
+    
   end
   
   describe 'sign up with invalid info' do

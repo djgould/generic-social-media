@@ -1,0 +1,5 @@
+<% provide(:title, 'Respond to request') %>
+<%= form_for @friendship do |f| %>
+  <%= f.submit 'Accept', class: 'button' %>
+  <%= f.submit 'Decline', class: 'button alert' %>
+<% end %>

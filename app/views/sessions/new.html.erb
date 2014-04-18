@@ -1,0 +1,12 @@
+<% provide(:title, 'Sign In') %>
+
+<div class="row push-down-15">
+  <div class="large-4 large-centered columns text-center">
+    <h2 class="form-title">Sign In</h2>
+    <%= form_tag sessions_path do %>
+      <%= text_field_tag :email, nil, placeholder: 'Email' %>
+      <%= password_field_tag :password, nil, placeholder: 'Password'%> 
+    <%= submit_tag 'Sign In', class: 'button' %>
+    <% end %>
+  </div>
+</div>

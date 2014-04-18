@@ -1,1 +1,67 @@
 <% provide(:title, @user.name) %>
+<% if current_user == @user and !current_user.requested_friends.empty? %>
+  <!-- requested friends -->
+  <% current_user.requested_friends.each do |requested_friend| %>
+     <div class='row alert-box radius'>
+       <div class='large-6 columns'>
+         <h5><%= requested_friend.name %> wants to be your friend </h5>
+       </div>
+      <% @friendship = Friendship.conn(current_user, requested_friend) %>
+       <div class='large-6 columns'>
+         <%= link_to "Respond?", edit_friendship_path(@friendship), class: 'button tiny alert' %>
+       </div>
+    </div>
+  <% end %>
+<% end %>
+<div class="row push-down-15">
+    <div class="large-4 columns text-center alert-box secondary">
+      <h3><%= @user.name %></h3>
+      <h3><%= @user.email %></h3>
+      <% if Friendship.exists?(current_user, @user) %>
+        <% if @friendship.status == Friendship::PENDING %>
+          <h4> You have sent <%= @user.name %> a friend request </h4>
+        <% elsif @friendship.status == Friendship::REQUESTED %>
+          <h4> <%= @user.name %> wants to be your friend </h4>
+        <% end %>
+      <% elsif current_user != @user %>
+      <%= link_to 'Add Friend', user_friendships_path(@user), method: :post, class: 'friend request' %>
+      <% end %>
+      <% unless @user.friends.empty? %>
+        <% @user.friends.each do |friend| %>
+          <% unless friend == current_user %>
+            <h4><%= link_to friend.name, user_path(friend) %> is your friend</h4>
+          <% end %>
+        <% end %>
+      <% end %>
+    </div>
+    <div class="large-7 large-offset-1 columns">
+      <% if current_user == @user %>
+        <%= form_for @post do |f| %>
+          <div class='large-9 columns post-input'>
+            <%= f.text_field :content %>
+          </div>
+          <%= f.submit 'Post', class: 'button' %>
+        <% end %>
+      <% else %>
+        <%= form_for [@user, @wall_post] do |f| %>
+          <div class='large-9 columns post-input'>
+            <%= f.text_field :content %>
+          </div>
+          <%= f.submit 'Post', class: 'button' %>
+        <% end %>
+      <% end %>
+      <% unless @wall_feed.empty? %>
+        <% @wall_feed.each do |item| %>
+          <div class="row alert-box secondary">
+            <p class="large-3 columns"><%= item.user.name %> 
+              <% if item.type == 'WallPost' %> 
+                posted on <%= item.friend.name %>'s wall
+              <% end %>
+            </p>
+            <p class="large-6 columns"><%= item.content %></p>
+            <p class="large-3 columns"><%= item.created_at.strftime("Posted at %H:%M") %></p>
+          </div>
+        <% end %>
+      <% end %>
+    </section>
+  </div>

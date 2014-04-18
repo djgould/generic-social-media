@@ -1,0 +1,32 @@
+<nav class="top-bar" data-topbar>
+  <ul class="title-area">
+    <li class="name">
+      <h1><%= link_to 'My Site', root_path %></h1>
+    </li>
+  </ul>
+
+  <section class="top-bar-section">
+    <!-- Right Nav Section -->
+    <ul class="right">
+      <li class="active">
+        <% if signed_in? %>
+          <%= link_to 'Profile', user_path(current_user) %>
+        <% else %>
+          <%= link_to 'Sign Up', sign_up_path %>
+        <% end %>
+      </li>
+      <li class="has-dropdown">
+        <a href="#">Options</a>
+        <ul class="dropdown">
+          <li>
+            <% unless signed_in? %>
+              <%= link_to 'Sign In', sign_in_path %>
+            <% else %>
+              <%= link_to 'Sign Out', sign_out_path, method: :delete %>
+            <% end %>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </section>
+</nav>

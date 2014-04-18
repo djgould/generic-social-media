@@ -8,6 +8,14 @@ class Friendship < ActiveRecord::Base
   REQUESTED = 1
   PENDING = 2
   
+  def accept
+    Friendship.accept(user_id, friend_id)
+  end
+  
+  def unfriend
+    Friendship.unfriend(user_id, friend_id)
+  end
+  
   class << self
     def exists?(user, friend)
       not conn(user, friend).nil?

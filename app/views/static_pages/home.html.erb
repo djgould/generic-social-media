@@ -1,0 +1,26 @@
+<div class="row">
+  <div class="large-6 large-centered columns push-down-15">
+    <% if current_user %>
+        <%= form_for @post do |f| %>
+          <div class='large-9 columns post-input'>
+            <%= f.text_field :content %>
+          </div>
+          
+          <%= f.submit 'Post', class: 'button' %>
+        <% end %>
+      <% end %>
+    <% unless @feed.empty? %>
+      <% @feed.each do |item| %>
+          <div class="row alert-box secondary">
+            <p class="large-3 columns"><%= item.user.name %>
+              <% if item.type == 'WallPost' %>
+                posted on <%= item.friend.name %>'s wall
+              <% end %>
+            </p>
+            <p class="large-6 columns"><%= item.content %></p>
+            <p class="large-3 columns"><%= item.created_at.strftime("Posted at %H:%M") %></p>
+          </div>
+      <% end %>
+   <% end %>
+  </div>
+</div>

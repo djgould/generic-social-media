@@ -60,7 +60,7 @@ describe User do
     end
     
     it 'should include user as requestd_friend for other user' do
-      @requested_friend = @other_user.requested_friend
+      @requested_friend = @other_user.requested_friends
       expect(@requested_friend.first).to eq @user
     end
     

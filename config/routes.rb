@@ -1,10 +1,20 @@
 FacebookClone::Application.routes.draw do
+  get "static_pages/home"
   get "friendships/create"
   get "friendships/destroy"
-  resources :users
+  resources :users do
+    resources :friendships
+    resources :wall_posts
+    resources :posts
+  end
+  resources :posts
+  resources :friendships
+  resources :wall_posts
   resources :sessions, only: [:new, :create, :destroy]
   match '/sign_up', to: 'users#new', via: 'get'
   match '/sign_in', to: 'sessions#new', via: 'get'
+  match '/sign_out', to: 'sessions#destroy', via: 'delete'
+  root 'static_pages#home'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

@@ -1,0 +1,12 @@
+<% provide(:title, "#{@user.name}'s friends") %>
+<div class="row">
+  <div class="large-6 large-centered columns">
+    <% @friends.each do |friend| %>
+      <div class="row">
+        <div class="large-6 large-centered columns">
+          <%= link_to friend.name, user_path(friend) %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
