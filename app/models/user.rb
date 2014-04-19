@@ -23,7 +23,7 @@ class User < ActiveRecord::Base
   end
   
   def wall_feed
-    WallPost.wall_posts(self)
+    Post.wall_posts(self)
   end
   
   private
