@@ -1,8 +1,9 @@
-<% provide(:title, 'Sign In') %>
+<% provide(:title, 'Sign Up') %>
 
 <div class="container clearfix">
   <div class="container clearfix">
-    <h2 class="form-title">Sign In</h2>
+    <h2 class="form-title">Sign up</h2>
+    <p>Want to test out the application? Sign in with email 'fred@fred.com' and password 'test'</p>
     <%= form_for @user do |f| %>
       <%= f.text_field :name, class: 'email', placeholder: 'Name' %>
       <%= f.text_field :email, class: 'email', placeholder: 'Email' %>
